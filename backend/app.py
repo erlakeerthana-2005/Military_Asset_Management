@@ -19,6 +19,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
+    # Initialize database
+    try:
+        from init_db import init_db
+        init_db()
+        logger.info("Database initialized")
+    except Exception as e:
+        logger.error(f"Failed to initialize database: {e}")
+    
     # Initialize extensions
     CORS(app, origins=Config.CORS_ORIGINS, supports_credentials=True)
     jwt = JWTManager(app)
