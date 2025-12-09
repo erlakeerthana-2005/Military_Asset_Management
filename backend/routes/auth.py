@@ -32,7 +32,14 @@ def login():
             return jsonify({"error": "Invalid credentials"}), 401
         
         # Verify password
-        if not bcrypt.checkpw(password.encode('utf-8'), user['password_hash'].encode('utf-8')):
+        logger.info(f"Login attempt for user: {username}")
+        logger.info(f"Received password: '{password}'")
+        logger.info(f"Stored hash: {user['password_hash']}")
+        
+        is_valid = bcrypt.checkpw(password.encode('utf-8'), user['password_hash'].encode('utf-8'))
+        logger.info(f"Password match result: {is_valid}")
+
+        if not is_valid:
             return jsonify({"error": "Invalid credentials"}), 401
         
         # Create access token

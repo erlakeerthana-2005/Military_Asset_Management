@@ -1,33 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Color Palette - Military Theme */
-  --color-primary: #1a4d2e;
-  --color-primary-light: #2d6a44;
-  --color-primary-dark: #0f3320;
-  --color-secondary: #ff6b35;
-  --color-accent: #ffd23f;
-  --color-success: #27ae60;
-  --color-warning: #f39c12;
-  --color-danger: #e74c3c;
-  --color-info: #3498db;
+  /* Color Palette - Modern Military Theme */
+  --color-primary: #059669; /* Emerald 600 */
+  --color-primary-light: #34d399; /* Emerald 400 */
+  --color-primary-dark: #064e3b; /* Emerald 900 */
+  --color-secondary: #f59e0b; /* Amber 500 */
+  --color-accent: #3b82f6; /* Blue 500 */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
   
   /* Neutral Colors */
-  --color-bg-primary: #0a0e0d;
-  --color-bg-secondary: #1a1f1e;
-  --color-bg-tertiary: #242a29;
-  --color-bg-card: #2a3231;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #b8c5c2;
-  --color-text-muted: #7a8886;
-  --color-border: #3a4442;
-  --color-border-light: #4a5654;
+  --color-bg-primary: #0f172a; /* Slate 900 */
+  --color-bg-secondary: #1e293b; /* Slate 800 */
+  --color-bg-tertiary: #334155; /* Slate 700 */
+  --color-bg-card: rgba(30, 41, 59, 0.7);
+  --color-text-primary: #f8fafc; /* Slate 50 */
+  --color-text-secondary: #cbd5e1; /* Slate 300 */
+  --color-text-muted: #94a3b8; /* Slate 400 */
+  --color-border: #334155; /* Slate 700 */
+  --color-border-light: #475569; /* Slate 600 */
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #1a4d2e 0%, #2d6a44 100%);
-  --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-  --gradient-dark: linear-gradient(180deg, #0a0e0d 0%, #1a1f1e 100%);
-  --gradient-card: linear-gradient(145deg, rgba(42, 50, 49, 0.6) 0%, rgba(26, 31, 30, 0.4) 100%);
+  --gradient-primary: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  --gradient-secondary: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  --gradient-dark: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+  --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.4) 100%);
   
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);

@@ -176,12 +176,12 @@ INSERT INTO equipment_types (name, category, description, unit_of_measure) VALUE
 -- Insert Users (passwords are hashed - these are placeholders, will be generated properly in backend)
 -- Default password for all: password123
 INSERT INTO users (username, password_hash, full_name, role, base_id, email) VALUES
-('admin', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYqNlLqPGiW', 'System Administrator', 'admin', NULL, 'admin@military.gov'),
-('commander_alpha', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYqNlLqPGiW', 'John Smith', 'base_commander', 1, 'commander.alpha@military.gov'),
-('commander_bravo', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYqNlLqPGiW', 'Sarah Johnson', 'base_commander', 2, 'commander.bravo@military.gov'),
-('commander_charlie', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYqNlLqPGiW', 'Michael Brown', 'base_commander', 3, 'commander.charlie@military.gov'),
-('logistics_alpha', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYqNlLqPGiW', 'Robert Wilson', 'logistics_officer', 1, 'logistics.alpha@military.gov'),
-('logistics_bravo', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYqNlLqPGiW', 'Jennifer Martinez', 'logistics_officer', 2, 'logistics.bravo@military.gov');
+('admin', '$2b$12$Sy86fbw.a7ydznCC5SBynuDdaI1Vaha6.lJxxqUFcHtgX4.FeujPS', 'System Administrator', 'admin', NULL, 'admin@military.gov'),
+('commander_alpha', '$2b$12$Sy86fbw.a7ydznCC5SBynuDdaI1Vaha6.lJxxqUFcHtgX4.FeujPS', 'John Smith', 'base_commander', 1, 'commander.alpha@military.gov'),
+('commander_bravo', '$2b$12$Sy86fbw.a7ydznCC5SBynuDdaI1Vaha6.lJxxqUFcHtgX4.FeujPS', 'Sarah Johnson', 'base_commander', 2, 'commander.bravo@military.gov'),
+('commander_charlie', '$2b$12$Sy86fbw.a7ydznCC5SBynuDdaI1Vaha6.lJxxqUFcHtgX4.FeujPS', 'Michael Brown', 'base_commander', 3, 'commander.charlie@military.gov'),
+('logistics_alpha', '$2b$12$Sy86fbw.a7ydznCC5SBynuDdaI1Vaha6.lJxxqUFcHtgX4.FeujPS', 'Robert Wilson', 'logistics_officer', 1, 'logistics.alpha@military.gov'),
+('logistics_bravo', '$2b$12$Sy86fbw.a7ydznCC5SBynuDdaI1Vaha6.lJxxqUFcHtgX4.FeujPS', 'Jennifer Martinez', 'logistics_officer', 2, 'logistics.bravo@military.gov');
 
 -- Insert Initial Asset Inventory
 INSERT INTO asset_inventory (base_id, equipment_type_id, quantity) VALUES
