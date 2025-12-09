@@ -8,7 +8,8 @@ services:
     plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: python init_db.py && gunicorn app:app
+    healthCheckPath: /api/health
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -17,20 +18,7 @@ services:
       - key: JWT_SECRET_KEY
         generateValue: true
       - key: CORS_ORIGINS
-        value: https://military-asset-frontend.onrender.com,https://kristalballproject.netlify.app
-
-  # Frontend Static Site
-  - type: web
-    name: military-asset-frontend
-    env: static
-    region: singapore
-    plan: free
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://military-asset-backend.onrender.com/api
+        value: https://kristalballproject.netlify.app
 
 databases:
   - name: military-asset-db
@@ -38,4 +26,3 @@ databases:
     plan: free
     databaseName: military_asset_db
     user: postgres
-
