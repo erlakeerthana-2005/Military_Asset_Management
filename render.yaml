@@ -25,4 +25,4 @@ databases:
     region: singapore
     plan: free
     databaseName: military_asset_db
-    user: postgres
+
