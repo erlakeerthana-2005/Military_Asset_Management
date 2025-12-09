@@ -1,7 +1,6 @@
 
 import os
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
 from config import Config
 import logging
 import bcrypt
@@ -19,12 +18,12 @@ def init_db():
             schema_sql = f.read()
             
         # Connect to database
-        conn = psycopg2.connect(Config.DATABASE_URL, cursor_factory=RealDictCursor)
+        conn = psycopg.connect(Config.DATABASE_URL)
         cursor = conn.cursor()
         
         # Check if users table exists
         cursor.execute("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'users');")
-        exists = cursor.fetchone()['exists']
+        exists = cursor.fetchone()[0]
         
         if not exists:
             logger.info("Initializing database schema...")

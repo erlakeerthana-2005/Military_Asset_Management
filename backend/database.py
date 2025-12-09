@@ -1,5 +1,5 @@
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg import sql
 from config import Config
 import logging
 
@@ -15,9 +15,9 @@ class Database:
         """Get database connection"""
         try:
             if self.conn is None or self.conn.closed:
-                self.conn = psycopg2.connect(
+                self.conn = psycopg.connect(
                     Config.DATABASE_URL,
-                    cursor_factory=RealDictCursor
+                    autocommit=False
                 )
             return self.conn
         except Exception as e:
