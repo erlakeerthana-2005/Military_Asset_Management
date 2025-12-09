@@ -3,47 +3,76 @@
 
 const MOCK_DELAY = 800;
 
-export const mockUser = {
-    id: 1,
-    username: 'admin',
-    full_name: 'System Administrator',
-    role: 'admin',
-    base_id: null,
-    base_name: null
-};
-
-export const mockBases = [
-    { id: 1, name: 'Base Alpha', location: 'Northern Region', commander_name: 'Col. Smith' },
-    { id: 2, name: 'Base Bravo', location: 'Eastern Region', commander_name: 'Col. Johnson' }
+const mockUsers = [
+    {
+        id: 1,
+        username: 'admin',
+        password: 'password123',
+        full_name: 'System Administrator',
+        role: 'admin',
+        base_id: null,
+        base_name: null
+    },
+    {
+        id: 2,
+        username: 'commander_alpha',
+        password: 'password123',
+        full_name: 'Col. John Smith',
+        role: 'base_commander',
+        base_id: 1,
+        base_name: 'Base Alpha'
+    },
+    {
+        id: 3,
+        username: 'commander_bravo',
+        password: 'password123',
+        full_name: 'Col. Sarah Johnson',
+        role: 'base_commander',
+        base_id: 2,
+        base_name: 'Base Bravo'
+    },
+    {
+        id: 4,
+        username: 'logistics_alpha',
+        password: 'password123',
+        full_name: 'Lt. Robert Wilson',
+        role: 'logistics_officer',
+        base_id: 1,
+        base_name: 'Base Alpha'
+    },
+    {
+        id: 5,
+        username: 'logistics_bravo',
+        password: 'password123',
+        full_name: 'Lt. Jennifer Martinez',
+        role: 'logistics_officer',
+        base_id: 2,
+        base_name: 'Base Bravo'
+    }
 ];
-
-export const mockDashboard = {
-    total_assets: 15420,
-    total_value: 25000000,
-    critical_alerts: 2,
-    pending_transfers: 5
-};
-
-// Helper to simulate async API call
-const mockResponse = (data) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({ data });
-        }, MOCK_DELAY);
-    });
-};
 
 export const mockAuthAPI = {
     login: (credentials) => {
-        if (credentials.username === 'admin' && credentials.password === 'password123') {
+        const user = mockUsers.find(u =>
+            u.username === credentials.username &&
+            u.password === credentials.password
+        );
+
+        if (user) {
+            // Return user without password
+            const { password, ...safeUser } = user;
             return mockResponse({
-                access_token: 'mock-jwt-token-xyz',
-                user: mockUser
+                access_token: `mock-jwt-token-${user.username}`,
+                user: safeUser
             });
         }
         return Promise.reject({ response: { data: { error: 'Invalid credentials' } } });
     },
-    getMe: () => mockResponse({ user: mockUser }),
+    getMe: () => {
+        // Just return admin for simplicty in getMe since we don't track session in mock
+        const { password, ...safeUser } = mockUsers[0];
+        return mockResponse({ user: safeUser });
+    },
     changePassword: () => mockResponse({ message: 'Password changed' })
 };
 
