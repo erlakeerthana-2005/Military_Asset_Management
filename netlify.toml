@@ -2,6 +2,7 @@
   base = "frontend"
   publish = "dist"
   command = "npm run build"
+  environment = { VITE_USE_MOCK = "true" }
 
 [[redirects]]
   from = "/*"
