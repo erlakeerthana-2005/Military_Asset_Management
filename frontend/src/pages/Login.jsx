@@ -26,6 +26,19 @@ const Login = () => {
         }
     };
 
+    const demoLogin = async (demoUsername) => {
+        setError('');
+        setLoading(true);
+        // all demo users use the same demo password in mock data
+        const result = await login(demoUsername, 'password123');
+        if (result.success) {
+            navigate('/dashboard');
+        } else {
+            setError(result.error);
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="login-container">
             <div className="login-background"></div>
@@ -106,6 +119,11 @@ const Login = () => {
                                 <span className="badge badge-warning">Logistics</span>
                                 <p>logistics_alpha / password123</p>
                             </div>
+                        </div>
+                        <div className="demo-buttons" style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                            <button className="btn btn-secondary" onClick={() => demoLogin('admin')} disabled={loading}>Login as Admin</button>
+                            <button className="btn btn-secondary" onClick={() => demoLogin('commander_alpha')} disabled={loading}>Login as Commander</button>
+                            <button className="btn btn-secondary" onClick={() => demoLogin('logistics_alpha')} disabled={loading}>Login as Logistics</button>
                         </div>
                     </div>
                 </div>
