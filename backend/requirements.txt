@@ -5,3 +5,6 @@ flask-jwt-extended
 werkzeug
 python-dotenv
 flask-bcrypt
+
+gunicorn
+psycopg2-binary
