@@ -1,4 +1,4 @@
-```python
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -11,9 +11,11 @@ import os
 app = Flask(__name__)
 
 # Database Configuration
-database_url = os.environ.get('DATABASE_URL', 'sqlite:///military.db')
-# Fix for Render's postgres:// URLs (SQLAlchemy requires postgresql://)
-if database_url.startswith("postgres://"):
+# Check for DATABASE_URL (Render) or POSTGRES_URL (Vercel)
+database_url = os.environ.get('DATABASE_URL') or os.environ.get('POSTGRES_URL') or 'sqlite:///military.db'
+
+# Fix for Render/Vercel postgres:// URLs (SQLAlchemy requires postgresql://)
+if database_url and database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
