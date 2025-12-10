@@ -1,3 +1,4 @@
+```python
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -5,9 +6,17 @@ from flask_bcrypt import Bcrypt
 from models import db, User, Base, AssetType, Transaction
 from datetime import datetime
 from sqlalchemy import func, and_
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///military.db'
+
+# Database Configuration
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///military.db')
+# Fix for Render's postgres:// URLs (SQLAlchemy requires postgresql://)
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['JWT_SECRET_KEY'] = 'super-secret-key-change-this'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
