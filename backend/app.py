@@ -19,7 +19,7 @@ if database_url and database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-app.config['JWT_SECRET_KEY'] = 'super-secret-key-change-this'
+app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'super-secret-key-change-this')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 CORS(app)
@@ -68,6 +68,14 @@ with app.app_context():
         db.session.add(commander)
         
     db.session.commit()
+
+@app.route('/', methods=['GET'])
+def health_check():
+    return jsonify({
+        "status": "healthy",
+        "message": "Military Asset Management Backend is running",
+        "timestamp": datetime.utcnow().isoformat()
+    })
 
 @app.route('/api/login', methods=['POST'])
 def login():
