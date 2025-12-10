@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import DemoLogin from '../components/DemoLogin';
 import '../styles/Login.css';
 
 const Login = () => {
@@ -26,18 +27,7 @@ const Login = () => {
         }
     };
 
-    const demoLogin = async (demoUsername) => {
-        setError('');
-        setLoading(true);
-        // all demo users use the same demo password in mock data
-        const result = await login(demoUsername, 'password123');
-        if (result.success) {
-            navigate('/dashboard');
-        } else {
-            setError(result.error);
-            setLoading(false);
-        }
-    };
+    // demoLogin is provided by AuthContext (uses mockAuthAPI directly)
 
     return (
         <div className="login-container">
@@ -71,11 +61,31 @@ const Login = () => {
                             placeholder="Enter your username"
                             required
                             autoFocus
-                            <div style={{ marginTop: '12px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                                <button type="button" className="btn btn-secondary" onClick={() => demoLogin('admin')} disabled={loading}>Login as Admin</button>
-                                <button type="button" className="btn btn-secondary" onClick={() => demoLogin('commander_alpha')} disabled={loading}>Login as Commander</button>
-                                <button type="button" className="btn btn-secondary" onClick={() => demoLogin('logistics_alpha')} disabled={loading}>Login as Logistics</button>
-                            </div>
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            className="form-input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-block"
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <>
+                                <div className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px' }}></div>
+                                Signing In...
                             </>
                         ) : (
                             'Sign In'
@@ -83,11 +93,7 @@ const Login = () => {
                     </button>
                 </form>
 
-                <div style={{ marginTop: '12px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                    <button className="btn btn-secondary" onClick={() => demoLogin('admin')} disabled={loading}>Login as Admin</button>
-                    <button className="btn btn-secondary" onClick={() => demoLogin('commander_alpha')} disabled={loading}>Login as Commander</button>
-                    <button className="btn btn-secondary" onClick={() => demoLogin('logistics_alpha')} disabled={loading}>Login as Logistics</button>
-                </div>
+                <DemoLogin disabled={loading} />
             </div>
         </div>
     );

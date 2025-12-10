@@ -96,3 +96,16 @@ export const mockGenericAPI = {
     update: () => mockResponse({ success: true }),
     delete: () => mockResponse({ success: true })
 };
+
+// --- Helpers and placeholders used by the mock APIs ---
+const mockResponse = (payload) => {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve({ data: payload }), MOCK_DELAY);
+    });
+};
+
+// Minimal placeholder data referenced above (keeps mocks robust)
+const mockDashboard = { metrics: {} };
+const mockBases = [{ id: 1, name: 'Base Alpha' }, { id: 2, name: 'Base Bravo' }];
+const mockUser = { id: 1, username: 'admin', full_name: 'System Administrator', role: 'admin' };
+
