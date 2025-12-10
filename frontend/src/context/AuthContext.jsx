@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { authAPI } from '../services/api';
+import { mockAuthAPI } from '../services/mockApi';
 
 const AuthContext = createContext(null);
 
@@ -46,6 +47,20 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const demoLogin = async (username) => {
+        try {
+            // use the mock API directly for demo login so buttons always work
+            const response = await mockAuthAPI.login({ username, password: 'password123' });
+            const { access_token, user } = response.data;
+            localStorage.setItem('token', access_token);
+            localStorage.setItem('user', JSON.stringify(user));
+            setUser(user);
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: 'Demo login failed' };
+        }
+    };
+
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -55,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     const value = {
         user,
         login,
+        demoLogin,
         logout,
         loading,
         isAuthenticated: !!user

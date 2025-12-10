@@ -71,31 +71,11 @@ const Login = () => {
                             placeholder="Enter your username"
                             required
                             autoFocus
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input
-                            id="password"
-                            type="password"
-                            className="form-input"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
-                            required
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="btn btn-primary btn-block"
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <>
-                                <div className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px' }}></div>
-                                Signing In...
+                            <div style={{ marginTop: '12px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                                <button type="button" className="btn btn-secondary" onClick={() => demoLogin('admin')} disabled={loading}>Login as Admin</button>
+                                <button type="button" className="btn btn-secondary" onClick={() => demoLogin('commander_alpha')} disabled={loading}>Login as Commander</button>
+                                <button type="button" className="btn btn-secondary" onClick={() => demoLogin('logistics_alpha')} disabled={loading}>Login as Logistics</button>
+                            </div>
                             </>
                         ) : (
                             'Sign In'
@@ -103,29 +83,10 @@ const Login = () => {
                     </button>
                 </form>
 
-                <div className="login-footer">
-                    <div className="demo-credentials">
-                        <p><strong>Demo Credentials:</strong></p>
-                        <div className="credentials-grid">
-                            <div>
-                                <span className="badge badge-primary">Admin</span>
-                                <p>admin / password123</p>
-                            </div>
-                            <div>
-                                <span className="badge badge-info">Commander</span>
-                                <p>commander_alpha / password123</p>
-                            </div>
-                            <div>
-                                <span className="badge badge-warning">Logistics</span>
-                                <p>logistics_alpha / password123</p>
-                            </div>
-                        </div>
-                        <div className="demo-buttons" style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
-                            <button className="btn btn-secondary" onClick={() => demoLogin('admin')} disabled={loading}>Login as Admin</button>
-                            <button className="btn btn-secondary" onClick={() => demoLogin('commander_alpha')} disabled={loading}>Login as Commander</button>
-                            <button className="btn btn-secondary" onClick={() => demoLogin('logistics_alpha')} disabled={loading}>Login as Logistics</button>
-                        </div>
-                    </div>
+                <div style={{ marginTop: '12px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                    <button className="btn btn-secondary" onClick={() => demoLogin('admin')} disabled={loading}>Login as Admin</button>
+                    <button className="btn btn-secondary" onClick={() => demoLogin('commander_alpha')} disabled={loading}>Login as Commander</button>
+                    <button className="btn btn-secondary" onClick={() => demoLogin('logistics_alpha')} disabled={loading}>Login as Logistics</button>
                 </div>
             </div>
         </div>
